@@ -12,30 +12,42 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var lista = arrayOf(findViewById<ImageButton>(R.id.btn1),findViewById<ImageButton>(R.id.btn2),findViewById<ImageButton>(R.id.btn3),findViewById<ImageButton>(R.id.btn4),findViewById<ImageButton>(R.id.btn5))
         var lista2 = arrayListOf<ImageButton>()
+        var lista3 = arrayListOf<Int>()
         var wartosc = 0
 
 
         for (elements in lista) {
             elements.setOnClickListener() {
-                if (lista2.size <= 1) {
+                if (lista2.size == 0) {
+                    /*if(lista2.size >= 1) {
+                        lista3.add(resources.getResourceEntryName(elements.id).removePrefix("btn").toInt())
+                    }*/
                     lista2.add(elements)
-                }
 
-                else {
-                    lista2 = arrayListOf()
-                    lista2.add(elements)
-                }
-
-                if (lista2.size <= 1) {
                     findViewById<TextView>(R.id.textView).text =
                         resources.getResourceEntryName(elements.id).removePrefix("btn")
                     findViewById<TextView>(R.id.textView2).text = ""
                 }
+
                 else {
-                    findViewById<TextView>(R.id.textView2).text =
-                        resources.getResourceEntryName(elements.id).removePrefix("btn")
+                    if(elements != lista2[0]) {
+                        lista2 = arrayListOf()
+                       /* lista2.add(elements) */
+
+                       /* if(lista3.size >= 2){
+                            lista3 = arrayListOf()
+                            lista3.add(resources.getResourceEntryName(elements.id).removePrefix("btn").toInt())
+                        }*/
+
+                        findViewById<TextView>(R.id.textView2).text =
+                            resources.getResourceEntryName(elements.id).removePrefix("btn")
+                    }
                 }
+
+                findViewById<TextView>(R.id.textView6).text = lista3.toString()
+                findViewById<TextView>(R.id.textView3).text = lista2.size.toString()
             }
+
         }
         findViewById<SeekBar>(R.id.seekBar)?.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(
